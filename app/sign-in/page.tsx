@@ -15,24 +15,18 @@ export default async function SignInPage() {
   return (
     <main className="min-h-screen bg-background flex items-center justify-center px-4" style={{ backgroundColor: '#0F172A' }}>
       <div className="w-full max-w-md space-y-6">
+        {/* Auth Form */}
+        <AuthForm mode="sign-in" />
+
         {/* Demo Button */}
         <Link href="/demo">
           <button
-            className="w-full py-4 px-6 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-            style={{ backgroundColor: '#10B981', color: '#0F172A' }}
+            className="w-full py-3 px-6 rounded-lg font-semibold hover:opacity-80 transition-opacity border"
+            style={{ backgroundColor: 'transparent', borderColor: '#475569', color: '#06B6D4' }}
           >
-            <span>🚀</span> Launch Demo Workspace
+            Try Demo Workspace
           </button>
         </Link>
-
-        <div className="flex items-center gap-3">
-          <div className="flex-1 h-px" style={{ backgroundColor: '#334155' }} />
-          <span style={{ color: '#94A3B8' }} className="text-sm">or</span>
-          <div className="flex-1 h-px" style={{ backgroundColor: '#334155' }} />
-        </div>
-
-        {/* Auth Form */}
-        <AuthForm mode="sign-in" />
       </div>
     </main>
   )

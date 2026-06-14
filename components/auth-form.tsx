@@ -33,11 +33,29 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
 
       if (result.error) {
         console.error('[v0] Auth error:', result.error)
-        setError(typeof result.error === 'string' ? result.error : (result.error as any).message ?? 'Something went wrong')
+        
+        // Handle specific error cases
+        const errorMessage = typeof result.error === 'string' 
+          ? result.error 
+          : (result.error as any).message ?? 'Something went wrong'
+        
+        // Check for unverified email error
+        if (errorMessage.includes('not verified') || errorMessage.includes('verify')) {
+          setError('Your email address has not been verified yet. Please check your inbox and complete verification before signing in.')
+          return
+        }
+        
+        setError(errorMessage)
         return
       }
 
-      router.push('/')
+      // After successful sign up, redirect to verification page
+      if (isSignUp) {
+        router.push(`/verify-email?email=${encodeURIComponent(email)}`)
+      } else {
+        // After sign in, redirect to dashboard
+        router.push('/dashboard')
+      }
       router.refresh()
     } catch (err) {
       console.error('[v0] Auth exception:', err)

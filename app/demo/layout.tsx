@@ -12,6 +12,7 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
   const navItems = [
     { name: 'Dashboard', href: '/demo', icon: LayoutDashboard },
     { name: 'Cases', href: '/demo/cases', icon: ClipboardList },
+    { name: 'Case Workspace', href: '/demo/case-workspace', icon: ClipboardList, highlight: true },
     { name: 'Providers', href: '/demo/providers', icon: Building2 },
     { name: 'Members', href: '/demo/members', icon: Users },
     { name: 'Outreach', href: '/demo/outreach', icon: Phone },
@@ -38,21 +39,26 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-          {navItems.map((item) => {
+          {navItems.map((item: any) => {
             const isActive = pathname === item.href
             const Icon = item.icon
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors relative"
                 style={{
-                  backgroundColor: isActive ? '#334155' : 'transparent',
-                  color: isActive ? '#06B6D4' : '#94A3B8',
+                  backgroundColor: isActive ? '#334155' : item.highlight ? '#06B6D415' : 'transparent',
+                  color: isActive ? '#06B6D4' : item.highlight ? '#06B6D4' : '#94A3B8',
                 }}
               >
                 <Icon className="w-5 h-5" />
                 <span className="font-medium">{item.name}</span>
+                {item.highlight && !isActive && (
+                  <span className="ml-auto text-xs px-2 py-1 rounded" style={{ backgroundColor: '#06B6D4', color: '#0F172A' }}>
+                    NEW
+                  </span>
+                )}
               </Link>
             )
           })}

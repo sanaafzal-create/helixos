@@ -128,6 +128,20 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
                 ? 'Create account'
                 : 'Sign in'}
           </Button>
+
+          <Link href="/demo" className="w-full">
+            <button
+              type="button"
+              className="w-full py-2 px-4 rounded-md border text-sm font-medium transition-colors hover:bg-muted"
+              style={{
+                borderColor: '#475569',
+                color: '#06B6D4',
+                backgroundColor: 'transparent',
+              }}
+            >
+              Try Demo Workspace
+            </button>
+          </Link>
         </form>
 
         <p className="text-sm text-muted-foreground text-center mt-6">

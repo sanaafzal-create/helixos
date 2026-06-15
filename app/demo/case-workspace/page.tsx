@@ -72,6 +72,12 @@ export default function CaseWorkspace() {
   const [showNoteInput, setShowNoteInput] = useState(false)
   const [newNote, setNewNote] = useState('')
   const [restrictedNote, setRestrictedNote] = useState(false)
+  const [showStatusModal, setShowStatusModal] = useState(false)
+  const [showAssignModal, setShowAssignModal] = useState(false)
+  const [showUploadModal, setShowUploadModal] = useState(false)
+  const [showTaskModal, setShowTaskModal] = useState(false)
+  const [caseStatus, setCaseStatus] = useState(caseData.status)
+  const [caseOwner, setCaseOwner] = useState(caseData.owner)
 
   return (
     <div className="h-screen flex overflow-hidden" style={{ backgroundColor: '#0F172A' }}>
@@ -174,16 +180,16 @@ export default function CaseWorkspace() {
 
           {/* QUICK ACTIONS */}
           <div className="flex gap-2 flex-wrap">
-            <button className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
+            <button onClick={() => setShowStatusModal(true)} className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
               Change Status
             </button>
-            <button className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
+            <button onClick={() => setShowAssignModal(true)} className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
               Assign Owner
             </button>
-            <button className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
+            <button onClick={() => setShowUploadModal(true)} className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
               <Upload className="w-4 h-4 inline mr-1" /> Upload Document
             </button>
-            <button className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
+            <button onClick={() => setShowTaskModal(true)} className="px-3 py-2 rounded-lg text-sm font-medium border hover:opacity-80" style={{ borderColor: '#475569', color: '#06B6D4' }}>
               <Plus className="w-4 h-4 inline mr-1" /> Create Task
             </button>
           </div>
@@ -455,6 +461,149 @@ export default function CaseWorkspace() {
           </div>
         </div>
       </div>
+
+      {/* MODALS */}
+      {/* Change Status Modal */}
+      {showStatusModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4" style={{ backgroundColor: '#1E293B', borderColor: '#334155', border: '1px solid' }}>
+            <h2 className="text-xl font-bold mb-4" style={{ color: '#FFFFFF' }}>Change Case Status</h2>
+            <div className="space-y-2 mb-6">
+              {['pending', 'active', 'on-hold', 'closed'].map((status) => (
+                <button
+                  key={status}
+                  onClick={() => {
+                    setCaseStatus(status)
+                    setShowStatusModal(false)
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg border transition-all"
+                  style={{
+                    borderColor: caseStatus === status ? '#06B6D4' : '#475569',
+                    backgroundColor: caseStatus === status ? '#06B6D415' : '#0F172A',
+                    color: caseStatus === status ? '#06B6D4' : '#FFFFFF',
+                  }}
+                >
+                  {status.charAt(0).toUpperCase() + status.slice(1)}
+                </button>
+              ))}
+            </div>
+            <button onClick={() => setShowStatusModal(false)} className="w-full px-4 py-2 rounded-lg border text-sm font-medium" style={{ borderColor: '#475569', color: '#94A3B8' }}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Assign Owner Modal */}
+      {showAssignModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4" style={{ backgroundColor: '#1E293B', borderColor: '#334155', border: '1px solid' }}>
+            <h2 className="text-xl font-bold mb-4" style={{ color: '#FFFFFF' }}>Assign Owner</h2>
+            <div className="space-y-2 mb-6">
+              {['Sarah Chen', 'Dr. Sarah Johnson', 'Rachel Thompson', 'James Wilson', 'Lisa Anderson'].map((person) => (
+                <button
+                  key={person}
+                  onClick={() => {
+                    setCaseOwner(person)
+                    setShowAssignModal(false)
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg border transition-all flex items-center gap-3"
+                  style={{
+                    borderColor: caseOwner === person ? '#06B6D4' : '#475569',
+                    backgroundColor: caseOwner === person ? '#06B6D415' : '#0F172A',
+                    color: caseOwner === person ? '#06B6D4' : '#FFFFFF',
+                  }}
+                >
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style={{ backgroundColor: '#06B6D4', color: '#0F172A' }}>
+                    {person.split(' ')[0][0]}
+                  </div>
+                  <div>
+                    <p className="font-medium">{person}</p>
+                    <p style={{ color: '#94A3B8' }} className="text-xs">{person.includes('Dr.') ? 'Physician' : 'Care Coordinator'}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+            <button onClick={() => setShowAssignModal(false)} className="w-full px-4 py-2 rounded-lg border text-sm font-medium" style={{ borderColor: '#475569', color: '#94A3B8' }}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Upload Document Modal */}
+      {showUploadModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4" style={{ backgroundColor: '#1E293B', borderColor: '#334155', border: '1px solid' }}>
+            <h2 className="text-xl font-bold mb-4" style={{ color: '#FFFFFF' }}>Upload Document</h2>
+            <div className="border-2 border-dashed rounded-lg p-8 text-center mb-4" style={{ borderColor: '#475569' }}>
+              <Upload className="w-8 h-8 mx-auto mb-2" style={{ color: '#06B6D4' }} />
+              <p style={{ color: '#FFFFFF' }} className="font-medium mb-1">Drag & drop or click to upload</p>
+              <p style={{ color: '#94A3B8' }} className="text-sm">PDF, Images, or Documents</p>
+            </div>
+            <div className="space-y-2 mb-6">
+              <label style={{ color: '#94A3B8' }} className="text-sm font-medium block">Category</label>
+              <select className="w-full px-3 py-2 rounded-lg border" style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}>
+                <option>Assessment</option>
+                <option>Lab Results</option>
+                <option>Medical Records</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => setShowUploadModal(false)} className="flex-1 px-4 py-2 rounded-lg border text-sm font-medium" style={{ borderColor: '#475569', color: '#94A3B8' }}>
+                Cancel
+              </button>
+              <button onClick={() => setShowUploadModal(false)} className="flex-1 px-4 py-2 rounded-lg text-sm font-medium" style={{ backgroundColor: '#06B6D4', color: '#0F172A' }}>
+                Upload
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Create Task Modal */}
+      {showTaskModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4" style={{ backgroundColor: '#1E293B', borderColor: '#334155', border: '1px solid' }}>
+            <h2 className="text-xl font-bold mb-4" style={{ color: '#FFFFFF' }}>Create New Task</h2>
+            <div className="space-y-4 mb-6">
+              <div>
+                <label style={{ color: '#94A3B8' }} className="text-sm font-medium block mb-2">Task Title</label>
+                <input type="text" placeholder="Enter task title" className="w-full px-3 py-2 rounded-lg border" style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }} />
+              </div>
+              <div>
+                <label style={{ color: '#94A3B8' }} className="text-sm font-medium block mb-2">Due Date</label>
+                <input type="date" className="w-full px-3 py-2 rounded-lg border" style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }} />
+              </div>
+              <div>
+                <label style={{ color: '#94A3B8' }} className="text-sm font-medium block mb-2">Priority</label>
+                <select className="w-full px-3 py-2 rounded-lg border" style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}>
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                </select>
+              </div>
+              <div>
+                <label style={{ color: '#94A3B8' }} className="text-sm font-medium block mb-2">Assign To</label>
+                <select className="w-full px-3 py-2 rounded-lg border" style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}>
+                  <option>Sarah Chen</option>
+                  <option>Dr. Sarah Johnson</option>
+                  <option>Rachel Thompson</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => setShowTaskModal(false)} className="flex-1 px-4 py-2 rounded-lg border text-sm font-medium" style={{ borderColor: '#475569', color: '#94A3B8' }}>
+                Cancel
+              </button>
+              <button onClick={() => setShowTaskModal(false)} className="flex-1 px-4 py-2 rounded-lg text-sm font-medium" style={{ backgroundColor: '#06B6D4', color: '#0F172A' }}>
+                Create Task
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -3,6 +3,7 @@
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Mail, ArrowLeft, RotateCw } from 'lucide-react'
+import { Logo } from '@/components/logo'
 
 export default function VerifyEmailPage() {
   const searchParams = useSearchParams()
@@ -24,6 +25,9 @@ export default function VerifyEmailPage() {
   return (
     <main className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#0F172A' }}>
       <div className="w-full max-w-md rounded-lg p-8 border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
+        <div className="flex justify-center mb-8">
+          <Logo variant="full" size="md" />
+        </div>
         <div className="flex justify-center mb-6">
           <div className="p-4 rounded-full" style={{ backgroundColor: '#06B6D440' }}>
             <Mail className="w-8 h-8" style={{ color: '#06B6D4' }} />

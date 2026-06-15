@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Users, Building2, ClipboardList, Phone, CheckSquare, FileText, Brain, Settings, LogOut, Menu, X } from 'lucide-react'
+import { Logo } from '@/components/logo'
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -29,13 +30,27 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
         className={`${sidebarOpen ? 'w-64' : 'w-0'} flex flex-col border-r transition-all duration-300 overflow-hidden`}
         style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}
       >
-        <div className="p-6 border-b" style={{ borderColor: '#334155' }}>
-          <h1 className="text-2xl font-bold" style={{ color: '#06B6D4' }}>
-            HelixOS
-          </h1>
-          <p style={{ color: '#94A3B8' }} className="text-sm">
-            Demo Workspace
-          </p>
+        <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: '#334155' }}>
+          <div className="flex-1 flex items-center gap-3">
+            {sidebarOpen && <Logo variant="icon" size="sm" />}
+            {sidebarOpen && (
+              <div>
+                <h1 className="text-lg font-bold" style={{ color: '#06B6D4' }}>
+                  HelixOS
+                </h1>
+                <p style={{ color: '#94A3B8' }} className="text-xs">
+                  Demo Workspace
+                </p>
+              </div>
+            )}
+          </div>
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="p-1 rounded-lg hover:opacity-80 transition-opacity"
+            style={{ color: '#94A3B8' }}
+          >
+            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
 
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">

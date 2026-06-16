@@ -9,7 +9,8 @@ export const metadata = {
 
 export default async function SignInPage() {
   const session = await auth.api.getSession({ headers: await headers() })
-  if (session?.user) redirect('/')
+  if (session?.user) redirect('/dashboard')
 
   return <AuthForm mode="sign-in" />
 }
+

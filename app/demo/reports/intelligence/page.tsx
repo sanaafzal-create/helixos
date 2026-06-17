@@ -1,6 +1,7 @@
 'use client'
 
-import { AlertTriangle, TrendingUp, Target, Zap } from 'lucide-react'
+import { AlertTriangle, TrendingUp, Target, Zap, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { getOperationalIntelligence, getExecutiveInsights } from '@/lib/analytics-seeds'
 
 export default function OperationalIntelligence() {
@@ -11,6 +12,12 @@ export default function OperationalIntelligence() {
     <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
       {/* Header */}
       <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+        <Link href="/demo/reports">
+          <button className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm mb-4 transition-colors hover:opacity-80" style={{ backgroundColor: '#334155', color: '#06B6D4' }}>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Reports
+          </button>
+        </Link>
         <h1 className="text-4xl font-bold" style={{ color: '#FFFFFF' }}>
           Operational Intelligence Dashboard
         </h1>

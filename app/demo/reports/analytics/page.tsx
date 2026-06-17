@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, Filter, Download, X } from 'lucide-react'
+import { Search, Filter, Download, X, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { getCaseAnalytics, getProviderAnalytics, getMemberAnalytics, getOutreachAnalytics, getTeamPerformance } from '@/lib/analytics-seeds'
 
 export default function AnalyticsWorkspace() {
@@ -23,6 +24,12 @@ export default function AnalyticsWorkspace() {
     <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
       {/* Header */}
       <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+        <Link href="/demo/reports">
+          <button className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm mb-4 transition-colors hover:opacity-80" style={{ backgroundColor: '#334155', color: '#06B6D4' }}>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Reports
+          </button>
+        </Link>
         <h1 className="text-4xl font-bold" style={{ color: '#FFFFFF' }}>
           Analytics Workspace
         </h1>

@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, Send, CommandIcon, Sparkles } from 'lucide-react'
+import { Search, Send, CommandIcon, Sparkles, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { getAllAIInsights } from '@/lib/ai-ops-seeds'
 
 const suggestedQueries = [
@@ -60,12 +61,19 @@ export default function AIQueryCenterPage() {
     <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
       {/* Header */}
       <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+        <Link href="/demo/ai-ops">
+          <button className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm mb-4 transition-colors hover:opacity-80" style={{ backgroundColor: '#334155', color: '#06B6D4' }}>
+            <ArrowLeft className="w-4 h-4" />
+            Back to AI Operations
+          </button>
+        </Link>
         <div>
           <h1 className="text-4xl font-bold mb-2" style={{ color: '#FFFFFF' }}>
             AI Query Center
           </h1>
           <p style={{ color: '#94A3B8' }} className="text-lg">
             Natural language search for intelligent insights and recommendations
+          </p>
           </p>
         </div>
       </div>

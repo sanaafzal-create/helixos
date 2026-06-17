@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Search, Eye, Phone, Mail, Target, TrendingUp } from 'lucide-react'
+import { Search, Eye, Phone, Mail, Target, TrendingUp, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { getContacts } from '@/lib/outreach-seeds'
 
@@ -32,6 +32,12 @@ export default function OutreachContactsPage() {
     <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
       {/* Header */}
       <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+        <Link href="/demo/outreach">
+          <button className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm mb-4 transition-colors hover:opacity-80" style={{ backgroundColor: '#334155', color: '#06B6D4' }}>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Outreach
+          </button>
+        </Link>
         <div className="mb-6">
           <h1 className="text-4xl font-bold" style={{ color: '#FFFFFF' }}>
             Contacts

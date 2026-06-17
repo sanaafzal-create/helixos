@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Mail, Phone, Building2, Users, Calendar, TrendingUp, Plus, MessageSquare, CheckSquare } from 'lucide-react'
+import { Mail, Phone, Building2, Users, Calendar, TrendingUp, Plus, MessageSquare, CheckSquare, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { getContact } from '@/lib/outreach-seeds'
 
 export default function ContactProfilePage({ params }: { params: Promise<{ id: string }> }) {
@@ -28,6 +29,12 @@ export default function ContactProfilePage({ params }: { params: Promise<{ id: s
     <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
       {/* Header */}
       <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+        <Link href="/demo/outreach/contacts">
+          <button className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm mb-4 transition-colors hover:opacity-80" style={{ backgroundColor: '#334155', color: '#06B6D4' }}>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Contacts
+          </button>
+        </Link>
         <div className="flex items-start justify-between mb-4">
           <div>
             <h1 className="text-4xl font-bold" style={{ color: '#FFFFFF' }}>

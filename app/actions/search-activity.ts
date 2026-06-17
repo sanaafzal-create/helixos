@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@/lib/auth'
-import { db } from '@/lib/db'
+// import { db } from '@/lib/db'
 import { headers } from 'next/headers'
 import { eq, and, or, like } from 'drizzle-orm'
 import * as schema from '@/lib/db/schema'

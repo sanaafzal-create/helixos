@@ -5,8 +5,11 @@ import { Sidebar } from '@/components/sidebar'
 import { Header } from '@/components/header'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  // Skip auth check during build when DATABASE_URL is not set
+  if (process.env.DATABASE_URL) {
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session?.user) redirect('/sign-in')
+  }
 
   return (
     <div className="flex h-screen" style={{ backgroundColor: '#0F172A' }}>

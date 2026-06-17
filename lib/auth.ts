@@ -1,8 +1,11 @@
 import { betterAuth } from 'better-auth'
 import { pool } from '@/lib/db'
 
+// Handle the case where DATABASE_URL is not set during build
+const dbConfig = pool && process.env.DATABASE_URL ? { database: pool } : {}
+
 export const auth = betterAuth({
-  database: pool,
+  ...dbConfig,
   baseURL:
     process.env.BETTER_AUTH_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL

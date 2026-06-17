@@ -74,7 +74,6 @@ export default function AIQueryCenterPage() {
           <p style={{ color: '#94A3B8' }} className="text-lg">
             Natural language search for intelligent insights and recommendations
           </p>
-          </p>
         </div>
       </div>
 

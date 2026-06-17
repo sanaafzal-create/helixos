@@ -100,7 +100,7 @@ export default function ProvidersPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="name">Sort by Name</option>
@@ -111,7 +111,7 @@ export default function ProvidersPage() {
           <select
             value={filterSpecialty}
             onChange={(e) => setFilterSpecialty(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="">All Specialties</option>
@@ -125,7 +125,7 @@ export default function ProvidersPage() {
           <select
             value={filterCity}
             onChange={(e) => setFilterCity(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="">All Markets</option>
@@ -139,7 +139,7 @@ export default function ProvidersPage() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="all">All Status</option>

@@ -120,7 +120,7 @@ export default function MembersPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="name">Sort by Name</option>
@@ -132,7 +132,7 @@ export default function MembersPage() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="all">All Status</option>
@@ -143,7 +143,7 @@ export default function MembersPage() {
           <select
             value={filterRisk}
             onChange={(e) => setFilterRisk(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="all">All Risk Levels</option>
@@ -155,7 +155,7 @@ export default function MembersPage() {
           <select
             value={filterCity}
             onChange={(e) => setFilterCity(e.target.value)}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="">All Markets</option>

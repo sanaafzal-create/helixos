@@ -1,7 +1,6 @@
 'use client'
 
-import { TrendingUp, TrendingDown, Clock, AlertCircle, ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
+import { TrendingUp, TrendingDown, Clock, AlertCircle } from 'lucide-react'
 import { getAIPredictions } from '@/lib/ai-ops-seeds'
 
 export default function PredictiveAnalyticsPage() {
@@ -11,12 +10,6 @@ export default function PredictiveAnalyticsPage() {
     <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
       {/* Header */}
       <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
-        <Link href="/demo/ai-ops">
-          <button className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm mb-4 transition-colors hover:opacity-80" style={{ backgroundColor: '#334155', color: '#06B6D4' }}>
-            <ArrowLeft className="w-4 h-4" />
-            Back to AI Operations
-          </button>
-        </Link>
         <div>
           <h1 className="text-4xl font-bold mb-2" style={{ color: '#FFFFFF' }}>
             Predictive Analytics

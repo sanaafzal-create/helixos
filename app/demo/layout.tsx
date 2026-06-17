@@ -32,7 +32,17 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
       >
         <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: '#334155' }}>
           <div className="flex-1 flex items-center gap-3">
-            {sidebarOpen && <Logo variant="icon-text" size="lg" />}
+            {sidebarOpen && <Logo variant="icon" size="sm" />}
+            {sidebarOpen && (
+              <div>
+                <h1 className="text-lg font-bold" style={{ color: '#06B6D4' }}>
+                  HelixOS
+                </h1>
+                <p style={{ color: '#94A3B8' }} className="text-xs">
+                  Demo Workspace
+                </p>
+              </div>
+            )}
           </div>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}

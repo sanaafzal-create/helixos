@@ -81,7 +81,7 @@ export default function AnalyticsWorkspace() {
           <select
             value={filters.market}
             onChange={(e) => setFilters({ ...filters, market: e.target.value })}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="all">All Markets</option>
@@ -94,7 +94,7 @@ export default function AnalyticsWorkspace() {
           <select
             value={filters.dateRange}
             onChange={(e) => setFilters({ ...filters, dateRange: e.target.value })}
-            className="px-3 py-2 rounded-lg border text-sm"
+            className="px-3 py-2 pr-10 rounded-lg border text-sm appearance-none cursor-pointer"
             style={{ backgroundColor: '#0F172A', borderColor: '#475569', color: '#FFFFFF' }}
           >
             <option value="1month">Last Month</option>

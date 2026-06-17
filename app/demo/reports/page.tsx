@@ -1,192 +1,257 @@
 'use client'
 
-import { demoReports } from '@/lib/demo-data'
-import { TrendingUp, Users, ClipboardList, Heart } from 'lucide-react'
+import { useState } from 'react'
+import { TrendingUp, TrendingDown, Activity, Users, Building2, Phone, CheckSquare, Brain, AlertCircle, BarChart3, ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import Link from 'next/link'
+import { getKPIData, getCaseAnalytics, getExecutiveInsights } from '@/lib/analytics-seeds'
 
-export default function DemoReportsPage() {
+export default function ExecutiveDashboard() {
+  const kpis = getKPIData()
+  const caseAnalytics = getCaseAnalytics()
+  const insights = getExecutiveInsights()
+
+  const kpiCards = [
+    { label: 'Active Cases', value: kpis.activeCases, icon: Activity, change: '+12%', trend: 'up' },
+    { label: 'Closed Cases', value: kpis.closedCases, icon: CheckSquare, change: '+8%', trend: 'up' },
+    { label: 'Resolution Rate', value: `${kpis.caseResolutionRate}%`, icon: TrendingUp, change: '-2%', trend: 'down' },
+    { label: 'Active Providers', value: kpis.activeProviders, icon: Building2, change: '+4%', trend: 'up' },
+    { label: 'Active Members', value: kpis.activeMembers, icon: Users, change: '+6%', trend: 'up' },
+    { label: 'Outreach Success', value: `${kpis.outreachSuccessRate}%`, icon: Phone, change: '+3%', trend: 'up' },
+    { label: 'Team Productivity', value: `${kpis.teamProductivityScore}%`, icon: BarChart3, change: '+5%', trend: 'up' },
+    { label: 'AI Insights', value: kpis.aiInsightsGenerated, icon: Brain, change: '+18%', trend: 'up' },
+    { label: 'High Risk Cases', value: kpis.highRiskCases, icon: AlertCircle, change: '+2', trend: 'down', alert: true },
+    { label: 'Open Tasks', value: kpis.openTasks, icon: CheckSquare, change: '-8%', trend: 'down' },
+  ]
+
   return (
-    <div style={{ backgroundColor: '#0F172A' }} className="p-8 space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold mb-2" style={{ color: '#FFFFFF' }}>
-          Reports
+    <main className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
+      {/* Header */}
+      <div className="border-b p-8" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+        <h1 className="text-4xl font-bold" style={{ color: '#FFFFFF' }}>
+          Executive Dashboard
         </h1>
-        <p style={{ color: '#94A3B8' }}>
-          View key metrics and program performance
+        <p style={{ color: '#94A3B8' }} className="text-lg mt-2">
+          Organization-wide performance and strategic metrics
         </p>
       </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <div className="flex items-center justify-between mb-2">
-            <p style={{ color: '#94A3B8' }} className="text-sm font-semibold">
-              Total Members
-            </p>
-            <Users className="w-5 h-5" style={{ color: '#06B6D4' }} />
-          </div>
-          <p style={{ color: '#FFFFFF' }} className="text-2xl font-bold">
-            {demoReports.summary.totalMembers.toLocaleString()}
-          </p>
-        </div>
-
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <div className="flex items-center justify-between mb-2">
-            <p style={{ color: '#94A3B8' }} className="text-sm font-semibold">
-              Active Cases
-            </p>
-            <ClipboardList className="w-5 h-5" style={{ color: '#10B981' }} />
-          </div>
-          <p style={{ color: '#FFFFFF' }} className="text-2xl font-bold">
-            {demoReports.summary.activeCases}
-          </p>
-        </div>
-
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <div className="flex items-center justify-between mb-2">
-            <p style={{ color: '#94A3B8' }} className="text-sm font-semibold">
-              Engagement
-            </p>
-            <TrendingUp className="w-5 h-5" style={{ color: '#F59E0B' }} />
-          </div>
-          <p style={{ color: '#FFFFFF' }} className="text-2xl font-bold">
-            {demoReports.summary.avgEngagementScore}%
-          </p>
-        </div>
-
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <div className="flex items-center justify-between mb-2">
-            <p style={{ color: '#94A3B8' }} className="text-sm font-semibold">
-              Cost Savings
-            </p>
-            <Heart className="w-5 h-5" style={{ color: '#EF4444' }} />
-          </div>
-          <p style={{ color: '#FFFFFF' }} className="text-2xl font-bold">
-            {demoReports.summary.costSavings}
-          </p>
-        </div>
-      </div>
-
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <h3 style={{ color: '#94A3B8' }} className="text-sm font-semibold mb-4">
-            Completed Cases
-          </h3>
-          <p style={{ color: '#FFFFFF' }} className="text-3xl font-bold">
-            {demoReports.summary.completedCases}
-          </p>
-          <p style={{ color: '#10B981' }} className="text-sm mt-2">
-            +12 this month
-          </p>
-        </div>
-
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <h3 style={{ color: '#94A3B8' }} className="text-sm font-semibold mb-4">
-            Readmission Rate
-          </h3>
-          <p style={{ color: '#FFFFFF' }} className="text-3xl font-bold">
-            {demoReports.summary.readmissionRate}%
-          </p>
-          <p style={{ color: '#10B981' }} className="text-sm mt-2">
-            ↓ 2.1% vs last quarter
-          </p>
-        </div>
-
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <h3 style={{ color: '#94A3B8' }} className="text-sm font-semibold mb-4">
-            Program ROI
-          </h3>
-          <p style={{ color: '#FFFFFF' }} className="text-3xl font-bold">
-            3.2x
-          </p>
-          <p style={{ color: '#10B981' }} className="text-sm mt-2">
-            Cost to benefit ratio
-          </p>
-        </div>
-      </div>
-
-      {/* Trends */}
-      <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-        <h3 style={{ color: '#FFFFFF' }} className="text-xl font-bold mb-6">
-          7-Month Trend
-        </h3>
-        <div className="space-y-4">
-          {demoReports.trends.map((trend) => (
-            <div key={trend.month} className="space-y-2">
-              <div className="flex justify-between items-center mb-1">
-                <span style={{ color: '#FFFFFF' }} className="font-semibold">
-                  {trend.month}
-                </span>
-                <span style={{ color: '#94A3B8' }} className="text-sm">
-                  {trend.cases} cases • {trend.outreach} outreach • {trend.engagement}% engagement
-                </span>
-              </div>
-              <div className="flex gap-1">
-                <div className="flex-1 bg-gray-700 rounded h-2 overflow-hidden">
-                  <div
-                    style={{
-                      width: `${(trend.cases / 50) * 100}%`,
-                      backgroundColor: '#06B6D4',
-                      height: '100%',
-                    }}
-                  />
+      {/* Content */}
+      <div className="p-8">
+        {/* KPI Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+          {kpiCards.map((card, idx) => {
+            const Icon = card.icon
+            const isAlert = card.alert
+            return (
+              <div
+                key={idx}
+                className="p-4 rounded-lg border"
+                style={{
+                  borderColor: isAlert ? '#EF444450' : '#334155',
+                  backgroundColor: isAlert ? '#EF444415' : '#1E293B',
+                }}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <Icon className="w-5 h-5" style={{ color: isAlert ? '#EF4444' : '#06B6D4' }} />
+                  <div className="flex items-center gap-1">
+                    {card.trend === 'up' ? (
+                      <ArrowUpRight className="w-4 h-4" style={{ color: '#10B981' }} />
+                    ) : (
+                      <ArrowDownRight className="w-4 h-4" style={{ color: '#EF4444' }} />
+                    )}
+                    <span style={{ color: card.trend === 'up' ? '#10B981' : '#EF4444' }} className="text-xs font-medium">
+                      {card.change}
+                    </span>
+                  </div>
                 </div>
+                <p style={{ color: '#94A3B8' }} className="text-xs font-medium">
+                  {card.label}
+                </p>
+                <p className="text-2xl font-bold mt-2" style={{ color: '#FFFFFF' }}>
+                  {card.value}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Case Trends */}
+          <div className="lg:col-span-2 border rounded-lg p-6" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold" style={{ color: '#FFFFFF' }}>
+                Case Volume & Resolution Trends
+              </h3>
+              <Link href="/demo/reports/analytics?view=cases">
+                <button
+                  className="text-xs px-2 py-1 rounded-lg transition-colors"
+                  style={{ backgroundColor: '#06B6D415', color: '#06B6D4' }}
+                >
+                  Detailed View
+                </button>
+              </Link>
+            </div>
+
+            <div className="space-y-3">
+              {caseAnalytics.volumeTrends.map((trend, idx) => (
+                <div key={idx} className="flex items-end gap-3">
+                  <div className="w-12">
+                    <p style={{ color: '#94A3B8' }} className="text-xs font-medium mb-2">
+                      {trend.month}
+                    </p>
+                    <div
+                      className="rounded-lg"
+                      style={{
+                        height: `${(trend.cases / 400) * 100}px`,
+                        backgroundColor: '#06B6D4',
+                        minHeight: '20px',
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span style={{ color: '#FFFFFF' }} className="text-sm font-semibold">
+                        {trend.cases} cases
+                      </span>
+                      <span style={{ color: '#10B981' }} className="text-xs">
+                        {trend.resolved} resolved
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Key Metrics */}
+          <div className="border rounded-lg p-6" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#FFFFFF' }}>
+              Key Metrics
+            </h3>
+            <div className="space-y-3">
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#0F172A' }}>
+                <p style={{ color: '#94A3B8' }} className="text-xs mb-1">
+                  Avg Resolution Time
+                </p>
+                <p className="text-2xl font-bold" style={{ color: '#06B6D4' }}>
+                  {caseAnalytics.resolutionTime}
+                </p>
+                <p style={{ color: '#94A3B8' }} className="text-xs">
+                  days
+                </p>
+              </div>
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#0F172A' }}>
+                <p style={{ color: '#94A3B8' }} className="text-xs mb-1">
+                  Open Cases
+                </p>
+                <p className="text-2xl font-bold" style={{ color: '#FFFFFF' }}>
+                  {caseAnalytics.openVsClosed.open}
+                </p>
+              </div>
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#0F172A' }}>
+                <p style={{ color: '#94A3B8' }} className="text-xs mb-1">
+                  High Risk Cases
+                </p>
+                <p className="text-2xl font-bold" style={{ color: '#EF4444' }}>
+                  {kpis.highRiskCases}
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Performance Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <h3 style={{ color: '#FFFFFF' }} className="text-lg font-bold mb-4">
-            Program Highlights
-          </h3>
-          <ul style={{ color: '#94A3B8' }} className="space-y-3 text-sm">
-            <li className="flex gap-2">
-              <span style={{ color: '#10B981' }}>✓</span>
-              <span>87.3% member engagement rate</span>
-            </li>
-            <li className="flex gap-2">
-              <span style={{ color: '#10B981' }}>✓</span>
-              <span>8.2% readmission reduction</span>
-            </li>
-            <li className="flex gap-2">
-              <span style={{ color: '#10B981' }}>✓</span>
-              <span>$2.4M annual cost savings</span>
-            </li>
-            <li className="flex gap-2">
-              <span style={{ color: '#10B981' }}>✓</span>
-              <span>156 successfully closed cases</span>
-            </li>
-          </ul>
+          </div>
         </div>
 
-        <div className="p-6 rounded-lg border" style={{ backgroundColor: '#1E293B', borderColor: '#334155' }}>
-          <h3 style={{ color: '#FFFFFF' }} className="text-lg font-bold mb-4">
-            Next Steps
-          </h3>
-          <ul style={{ color: '#94A3B8' }} className="space-y-3 text-sm">
-            <li className="flex gap-2">
-              <span style={{ color: '#06B6D4' }}>→</span>
-              <span>Expand provider network by 15%</span>
-            </li>
-            <li className="flex gap-2">
-              <span style={{ color: '#06B6D4' }}>→</span>
-              <span>Target 2,000 member enrollment</span>
-            </li>
-            <li className="flex gap-2">
-              <span style={{ color: '#06B6D4' }}>→</span>
-              <span>Implement predictive analytics</span>
-            </li>
-            <li className="flex gap-2">
-              <span style={{ color: '#06B6D4' }}>→</span>
-              <span>Launch behavioral health pilot</span>
-            </li>
-          </ul>
+        {/* Executive Insights */}
+        <div className="mt-6 border rounded-lg p-6" style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold" style={{ color: '#FFFFFF' }}>
+              Executive Insights
+            </h3>
+            <Link href="/demo/reports/intelligence">
+              <button
+                className="text-xs px-2 py-1 rounded-lg transition-colors"
+                style={{ backgroundColor: '#06B6D415', color: '#06B6D4' }}
+              >
+                View All
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3">
+            {insights.slice(0, 3).map(insight => (
+              <div
+                key={insight.id}
+                className="p-3 rounded-lg border"
+                style={{
+                  borderColor: '#475569',
+                  backgroundColor: '#0F172A',
+                }}
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <p className="font-medium text-sm" style={{ color: '#FFFFFF' }}>
+                      {insight.title}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span
+                        className="text-xs px-2 py-0.5 rounded"
+                        style={{
+                          backgroundColor: insight.category === 'opportunity' ? '#10B98130' : insight.category === 'risk' ? '#EF444430' : '#06B6D430',
+                          color: insight.category === 'opportunity' ? '#10B981' : insight.category === 'risk' ? '#EF4444' : '#06B6D4',
+                        }}
+                      >
+                        {insight.category}
+                      </span>
+                      <span
+                        className="text-xs px-2 py-0.5 rounded"
+                        style={{ backgroundColor: '#64748B30', color: '#94A3B8' }}
+                      >
+                        {(insight.confidence * 100).toFixed(0)}% confidence
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p style={{ color: '#06B6D4' }} className="text-lg font-bold">
+                      {insight.impactScore}
+                    </p>
+                    <p style={{ color: '#94A3B8' }} className="text-xs">
+                      impact
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Action Links */}
+        <div className="mt-8 flex gap-3 flex-wrap">
+          <Link href="/demo/reports/analytics">
+            <button
+              className="px-4 py-2 rounded-lg font-medium transition-colors"
+              style={{ backgroundColor: '#06B6D4', color: '#0F172A' }}
+            >
+              View Analytics
+            </button>
+          </Link>
+          <Link href="/demo/reports/builder">
+            <button
+              className="px-4 py-2 rounded-lg font-medium transition-colors border"
+              style={{ borderColor: '#334155', backgroundColor: 'transparent', color: '#06B6D4' }}
+            >
+              Build Custom Report
+            </button>
+          </Link>
+          <Link href="/demo/reports/intelligence">
+            <button
+              className="px-4 py-2 rounded-lg font-medium transition-colors border"
+              style={{ borderColor: '#334155', backgroundColor: 'transparent', color: '#06B6D4' }}
+            >
+              Operational Intelligence
+            </button>
+          </Link>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

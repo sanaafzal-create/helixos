@@ -69,7 +69,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
     <main className="min-h-svh bg-background flex items-center justify-center px-4">
       <Card className="w-full max-w-sm p-6">
         <div className="mb-8 flex flex-col items-center gap-3">
-          <Logo variant="full" size="lg" />
+          <Logo variant="icon-text" size="xl" />
           <div className="text-center">
             <h1 className="text-2xl font-semibold tracking-tight text-foreground">
               {isSignUp ? 'Create an account' : 'Welcome back'}

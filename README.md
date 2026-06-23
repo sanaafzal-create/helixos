@@ -8,6 +8,25 @@ This repository is linked to a [v0](https://v0.app) project. You can continue de
 
 [Continue working on v0 →](https://v0.app/chat/projects/prj_xvIiRkkYj1bYoxsrr4GGODUQNQqa)
 
+## Stack
+
+- **Framework:** Next.js (App Router), React 19, Tailwind v4
+- **Auth:** [Better Auth](https://www.better-auth.com/) (email + password)
+- **Database:** PostgreSQL via Drizzle ORM (`node-postgres`)
+
+## Environment & Database Setup
+
+1. Copy `.env.example` to `.env.local` and fill in the values:
+   - `DATABASE_URL` — your PostgreSQL connection string
+   - `BETTER_AUTH_URL` — app URL (defaults to `http://localhost:3000` in dev)
+   - `BETTER_AUTH_SECRET` — required in production (`openssl rand -base64 32`)
+2. Create the tables (Better Auth + application schema):
+   ```bash
+   pnpm db:init
+   # or: psql "$DATABASE_URL" -f lib/db/init.sql
+   ```
+   The schema is defined in `lib/db/schema.ts`; `lib/db/init.sql` mirrors it.
+
 ## Getting Started
 
 First, run the development server:

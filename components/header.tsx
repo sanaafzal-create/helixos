@@ -1,11 +1,20 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import { Search, Bell } from 'lucide-react'
+import { Search, Bell, LogOut } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { signOut } from '@/lib/auth-client'
 
 export function Header() {
-  const [searchOpen, setSearchOpen] = useState(false)
+  const router = useRouter()
+  const [signingOut, setSigningOut] = useState(false)
+
+  const handleSignOut = async () => {
+    setSigningOut(true)
+    await signOut()
+    router.push('/sign-in')
+    router.refresh()
+  }
 
   return (
     <div
@@ -32,6 +41,16 @@ export function Header() {
       <div className="flex items-center gap-4 ml-8">
         <button className="p-2 rounded-lg hover:opacity-80" style={{ color: '#94A3B8' }}>
           <Bell size={20} />
+        </button>
+        <button
+          onClick={handleSignOut}
+          disabled={signingOut}
+          className="flex items-center gap-2 p-2 rounded-lg hover:opacity-80 disabled:opacity-50 text-sm"
+          style={{ color: '#94A3B8' }}
+          aria-label="Sign out"
+        >
+          <LogOut size={18} />
+          {signingOut ? 'Signing out...' : 'Sign out'}
         </button>
       </div>
     </div>

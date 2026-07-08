@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Logo } from '@/components/logo'
 import {
   ArrowRight,
   ShieldCheck,
   Sparkles,
+  Dna,
   FileText,
   Search,
   Copy,
@@ -20,6 +20,31 @@ import {
   X,
   Check,
 } from 'lucide-react'
+
+function Brand({ size = 'md' }: { size?: 'sm' | 'md' }) {
+  const iconBox = size === 'sm' ? 'h-8 w-8' : 'h-10 w-10'
+  const iconSize = size === 'sm' ? 18 : 22
+  const textSize = size === 'sm' ? 'text-lg' : 'text-2xl'
+
+  return (
+    <Link href="/" className="inline-flex items-center gap-2.5">
+      <span
+        className={`flex ${iconBox} items-center justify-center rounded-xl`}
+        style={{
+          background: 'linear-gradient(135deg, rgba(6,182,212,0.22), rgba(16,185,129,0.14))',
+          border: '1px solid rgba(6,182,212,0.4)',
+          boxShadow: '0 0 20px -6px rgba(6,182,212,0.5)',
+        }}
+      >
+        <Dna size={iconSize} style={{ color: '#06B6D4' }} />
+      </span>
+      <span className={`${textSize} font-bold tracking-tight`}>
+        <span style={{ color: '#FFFFFF' }}>Helix</span>
+        <span style={{ color: '#06B6D4' }}>OS</span>
+      </span>
+    </Link>
+  )
+}
 
 const copilotFeatures = [
   {
@@ -82,11 +107,11 @@ export function LandingPage() {
     <div className="min-h-svh overflow-x-hidden" style={{ backgroundColor: '#0F172A', color: '#FFFFFF' }}>
       {/* ===== Navigation ===== */}
       <header className="sticky top-0 z-50 border-b backdrop-blur-xl" style={{ borderColor: '#1E293B', backgroundColor: 'rgba(15,23,42,0.72)' }}>
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Logo variant="full" size="md" href="/" />
+        <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <Brand />
 
-          {/* Desktop links */}
-          <div className="hidden items-center gap-8 md:flex">
+          {/* Desktop links — centered */}
+          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
             <a href="#platform" className="text-sm font-medium transition-colors hover:text-white" style={{ color: '#94A3B8' }}>
               Platform
             </a>
@@ -510,7 +535,7 @@ export function LandingPage() {
       {/* ===== Footer ===== */}
       <footer className="border-t" style={{ borderColor: '#1E293B' }}>
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <Logo variant="full" size="sm" href="/" />
+          <Brand size="sm" />
           <p className="text-sm" style={{ color: '#64748B' }}>
             © {new Date().getFullYear()} HelixOS · An AI-powered, privacy-first operations platform
           </p>

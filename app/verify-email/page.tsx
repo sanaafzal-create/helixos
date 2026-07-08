@@ -1,11 +1,11 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { Mail, ArrowLeft, RotateCw } from 'lucide-react'
 import { Logo } from '@/components/logo'
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const email = searchParams.get('email') || 'your email'
@@ -88,5 +88,17 @@ export default function VerifyEmailPage() {
         </p>
       </div>
     </main>
+  )
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#0F172A' }} />
+      }
+    >
+      <VerifyEmailContent />
+    </Suspense>
   )
 }

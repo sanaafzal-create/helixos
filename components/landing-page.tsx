@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -490,42 +491,81 @@ export function LandingPage() {
 
       {/* ===== Final CTA ===== */}
       <section className="border-t" style={{ borderColor: '#1E293B' }}>
-        <div className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
           <div
-            className="relative overflow-hidden rounded-3xl border px-8 py-16 text-center"
+            className="relative overflow-hidden rounded-3xl border"
             style={{ borderColor: '#334155', backgroundColor: '#1E293B' }}
           >
             <div
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  'radial-gradient(50% 80% at 50% 0%, rgba(6,182,212,0.18), transparent 65%), radial-gradient(40% 60% at 80% 100%, rgba(16,185,129,0.14), transparent 60%)',
+                  'radial-gradient(45% 70% at 15% 0%, rgba(6,182,212,0.18), transparent 65%), radial-gradient(45% 70% at 90% 100%, rgba(16,185,129,0.16), transparent 60%)',
               }}
             />
-            <div className="relative">
-              <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
-                See HelixOS in action
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-lg" style={{ color: '#94A3B8' }}>
-                Explore a fully populated demo workspace — no account required — or sign in to your team&apos;s
-                platform.
-              </p>
-              <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                <Link
-                  href="/demo"
-                  className="group flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-semibold shadow-lg transition-transform hover:scale-[1.02]"
-                  style={{ backgroundColor: '#06B6D4', color: '#0F172A', boxShadow: '0 12px 32px -10px rgba(6,182,212,0.7)' }}
+            <div className="relative grid items-center gap-10 lg:min-h-[560px] lg:grid-cols-2">
+              {/* Left: content */}
+              <div className="px-8 py-14 sm:px-12 lg:py-20 lg:pl-16">
+                <div
+                  className="mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium"
+                  style={{ borderColor: '#334155', backgroundColor: '#0F172A', color: '#06B6D4' }}
                 >
-                  Try Demo Workspace
-                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  href="/sign-in"
-                  className="flex items-center justify-center gap-2 rounded-xl border px-6 py-3.5 text-base font-semibold transition-colors hover:bg-white/5"
-                  style={{ borderColor: '#475569', color: '#FFFFFF' }}
-                >
-                  Sign In
-                </Link>
+                  <Sparkles size={13} />
+                  Ready when you are
+                </div>
+                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">See HelixOS in action</h2>
+                <p className="mt-5 max-w-lg text-lg leading-relaxed" style={{ color: '#94A3B8' }}>
+                  Explore a fully populated demo workspace — cases, members, providers, and the AI Operations Copilot,
+                  all with realistic data. No account required. Or sign in to your team&apos;s platform.
+                </p>
+
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    href="/demo"
+                    className="group flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-semibold shadow-lg transition-transform hover:scale-[1.02]"
+                    style={{ backgroundColor: '#06B6D4', color: '#0F172A', boxShadow: '0 12px 32px -10px rgba(6,182,212,0.7)' }}
+                  >
+                    Try Demo Workspace
+                    <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <Link
+                    href="/sign-in"
+                    className="flex items-center justify-center gap-2 rounded-xl border px-6 py-3.5 text-base font-semibold transition-colors hover:bg-white/5"
+                    style={{ borderColor: '#475569', color: '#FFFFFF' }}
+                  >
+                    Sign In
+                  </Link>
+                </div>
+
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" style={{ color: '#94A3B8' }}>
+                  <span className="flex items-center gap-2">
+                    <Check size={16} style={{ color: '#10B981' }} /> Instant access
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Check size={16} style={{ color: '#10B981' }} /> Privacy-first
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Check size={16} style={{ color: '#10B981' }} /> AI copilot included
+                  </span>
+                </div>
+              </div>
+
+              {/* Right: graphic */}
+              <div className="relative flex items-center justify-center px-8 pb-14 lg:h-full lg:py-14 lg:pr-16">
+                <div className="relative w-full max-w-md lg:max-w-lg">
+                  <div
+                    className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] opacity-70 blur-3xl"
+                    style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.35), rgba(16,185,129,0.22))' }}
+                  />
+                  <Image
+                    src="/auth-hero.png"
+                    alt="HelixOS unified case management — connected records, members, and health signals"
+                    width={640}
+                    height={640}
+                    className="h-auto w-full rounded-2xl border shadow-2xl"
+                    style={{ borderColor: 'rgba(6,182,212,0.35)' }}
+                  />
+                </div>
               </div>
             </div>
           </div>
